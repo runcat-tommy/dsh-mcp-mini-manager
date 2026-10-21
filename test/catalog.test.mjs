@@ -472,7 +472,7 @@ test('the profile layer is found through the loader base URL, and the scan is a 
   assert.equal(viaLoader.via, 'loader-base-url')
 
   // A host that composed the Loader elsewhere still finds the only profile.
-  const viaScan = resolveProfileDir({ home })
+  const viaScan = resolveProfileDir({ home, env: {} })
   assert.equal(viaScan.dir, profileDir)
   assert.equal(viaScan.via, 'profiles-scan')
 
@@ -484,7 +484,7 @@ test('the profile layer is found through the loader base URL, and the scan is a 
   // No profiles at all is not an error, just no layer to write.
   const empty = mkdtempSync(join(tmpdir(), 'mmm-cat-empty-'))
   sandboxes.push(empty)
-  assert.equal(resolveProfileDir({ home: empty }), undefined)
+  assert.equal(resolveProfileDir({ home: empty, env: {} }), undefined)
 })
 
 test('a profile with no manifest declares no bundles', () => {
